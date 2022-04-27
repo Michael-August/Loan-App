@@ -1,0 +1,21 @@
+.navbar {
+    height: 10vh;
+    transition: all 1s ease-in-out;
+    position: sticky;
+    top: 0;
+    background: rgb(77, 2, 77);
+    z-index: 100;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.navbar-light .navbar-brand {
+    color: whitesmoke;
+}
+
+.navbar-light .navbar-text {
+    color: whitesmoke;
+}

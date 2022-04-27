@@ -1,0 +1,12 @@
+.container {
+    color: white;
+}
+
+form {
+    margin: 2rem auto;
+    width: 70%;
+}
+
+input {
+    padding: 2rem;
+}

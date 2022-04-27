@@ -1,0 +1,71 @@
+.img-text {
+    width: 100%;
+    display: flex;
+    border-radius: 14px;
+
+    img {
+        width: 100%;
+        position: relative;
+    }
+
+    .text {
+        margin-top: 2rem;
+        position: absolute;
+        z-index: 12;
+        color: white;
+        padding: 0 2rem;
+
+        p {
+            font-size: 14px;
+            font-weight: 600;
+            color: black;
+        }
+    }
+}
+
+.row {
+    margin: 10rem 0;
+    color: white;
+}
+
+input {
+    padding: 2rem;
+}
+
+.password {
+    position: relative;
+}
+
+.btn-warning {
+    background-color: #ffc107d0;
+    border: #ffc107;
+    font-weight: 600;
+}
+
+.btn-warning:hover {
+    background-color: #ffc107;
+}
+
+.required {
+    color: red;
+}
+
+.border-color {
+    border: 1px solid red;
+}
+
+.fa {
+    position: absolute;
+    cursor: pointer;
+    top: 42%;
+    left: 90%;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+
+    input {
+        padding-left: 45px;
+    }
+}

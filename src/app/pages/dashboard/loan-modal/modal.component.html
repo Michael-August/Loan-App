@@ -1,0 +1,91 @@
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apply for a Loan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loanGetStarted">
+          <div formGroupName="loanNegotiation" *ngIf="step === 1">
+            <div class="form-group">
+              <label for="formGroupExampleInput"><span class="required text-danger">*</span> Loan Type</label>
+              <select formControlName='loan_id' (change)="checkLoan()">
+                <option value="">Select Loan Type</option>
+                <option [value]='loan.id' *ngFor="let loan of loanType">{{ loan.name }}</option>
+              </select>
+              <p class="text-danger" *ngIf="!is_avail">{{message}}</p>
+              <div *ngIf="loan_id.invalid && (loan_id.touched || loan_id.dirty)">
+                <p class="text-danger">Loan Type or Tenure is required</p>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput"><span class="required text-danger">*</span> Loan Amount</label>
+                <div class="faStyle">
+                  <i class="fa fa-usd"></i> 
+                  <input type="number" class="form-control" id="formGroupExampleInput" formControlName='amount' placeholder="Amount" (keyup)="loanPayBack()">
+                </div>
+                <div *ngIf="amount.invalid && (amount.touched || amount.dirty)">
+                  <p class="text-danger">Loan Amount is required</p>
+                </div>
+                <!-- <p class="text-danger" *ngIf="amount.value > 1000000">Amount can't be more than 1,000,000</p>
+                <p class="text-danger" *ngIf="amount.value > 50,000">Amount can't be less than than 50,000</p> -->
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput"><span class="required text-danger">*</span> Loan Tenure</label>
+              <select name="" id="" formControlName='duration' (change)="loanPayBack()">
+                  <option value="1">1 month</option>
+                  <option value="2">2 months</option>
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+              </select>
+              <div *ngIf="tenure.invalid && (tenure.touched || tenure.dirty)">
+                  <p class="text-danger">Loan Duration or Tenure is required</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Pay Back Every Month</label>
+              <input type="text" class="form-control" [placeholder]="payBackPerMonth" readonly>
+              <p class="text-info">You are borrowing <span>{{amount.value}}</span> over <span>{{tenure.value}}</span> months period at 5% with a total loan cost of <span>{{payBack}}</span>. No additional fees.</p>
+            </div>
+          </div>
+          <div formGroupName="loanPurpose" *ngIf="step === 2">
+            <h4 class="stepHeading">Loan Purpose</h4>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="">Company Name</label>
+                  <input type="text" formControlName="place_of_work" class="form-control" placeholder="Company Name">
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="">Salary Payment Date</label>
+                  <input type="date" formControlName="salary_payment_date" class="form-control" placeholder="Payment Date">
+              </div>
+            </div>
+            <div class="form-group">
+                <label for=""><span class="required text-danger">*</span> Purpose</label>
+                <input type="text" formControlName="purpose" class="form-control" placeholder="Loan Purpose">
+                <div *ngIf="purpose.invalid && (purpose.touched || purpose.dirty)">
+                  <p class="text-danger">Loan Purpose is required</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Monthly Outstanding</label>
+                <input type="number" formControlName="monthly_outstanding" class="form-control" placeholder="Monthly Outstanding">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" *ngIf="step === 1" (click)="getStarted()" class="btn btn-warning btn-lg btn-block">Get Started <i class="fa fa-arrow-right ml-4"></i></button>
+        <button type="submit" *ngIf="step === 2" (click)="getStarted()" class="btn btn-warning btn-lg btn-block">Apply <i class="fa fa-arrow-right ml-4"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

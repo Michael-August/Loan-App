@@ -1,0 +1,216 @@
+<div class="container">
+    <div class="row">
+        <app-progress style="margin-top: 2rem;" 
+        [step]="step" 
+        [firstStage]="personalDetails" 
+        [SecondStage]="proffesionalDetails" 
+        [thirdStage]="addressDetails" 
+        [fourthStage]="telephoneDetails" 
+        [fifthStage]="nextOfKinInfo"
+        [sixthStage]="guarrantorInfo"></app-progress>
+
+        <form [formGroup]="kycForm" (ngSubmit)="submitKycInfo()">
+            <div class="steps" *ngIf="step === 1" formGroupName="personalDetails">
+                <h4 class="stepHeading">Personal Details</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Home Address</label>
+                        <input type="text" formControlName="home_address" class="form-control" placeholder="Home Address">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Office Address</label>
+                        <input type="text" formControlName="office_address" class="form-control" placeholder="Office Address">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Date Of Birth</label>
+                        <input type="date" formControlName="date_of_birth" class="form-control" placeholder="DOB">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Employment Date</label>
+                        <input type="date" formControlName="employment_date" class="form-control" placeholder="Employment Date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">ID card type</label>
+                        <input type="text" formControlName="id_card_type" class="form-control" placeholder="ID card type">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">ID card No</label>
+                        <input type="number" formControlName="id_card_no" class="form-control" placeholder="ID card no">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">ID Code</label>
+                        <input type="text" formControlName="country_id" class="form-control" placeholder="ID Code">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">ID Expiry Date</label>
+                        <input type="date" formControlName="id_card_expiry" class="form-control" placeholder="ID Expiry Date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="">Gender</label>
+                        <select formControlName='gender'>
+                            <option value='male'>Male</option>
+                            <option value='female'>Female</option>
+                            <option value='others'>Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Marital Status</label>
+                        <select formControlName='marital_status'>
+                            <option value='single'>Single</option>
+                            <option value='married'>Married</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group col-md-3">
+                        <label for="">Upload Image</label>
+                        <input type="file" formControlName="base64Image">
+                    </div> -->
+                    <div class="form-group col-md-6">
+                        <label for="">Upload Bank Statement</label>
+                        <input type="file" (change)="converToBase64($event)" formControlName="content">
+                    </div>
+                </div>
+                <p class="text-danger">{{message}}</p>
+            </div>
+
+            <div class="steps" *ngIf="step === 2" formGroupName="proffesionalDetails">
+                <div>
+                    <h4 class="stepHeading">Proffesional Details</h4>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="">Place of Work</label>
+                            <input type="text" formControlName="place_of_work" class="form-control" placeholder="Place of work">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Position</label>
+                            <input type="text" formControlName="position_held" class="form-control" placeholder="Human Resource Manager">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="">Educational Qualification</label>
+                            <input type="text" formControlName="educational_qualification" class="form-control" placeholder="Bsc. English">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">Educational Level</label>
+                            <input type="text" formControlName="career_level" class="form-control" placeholder="Bachelor Degree">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Years of Experience</label>
+                        <input type="number" formControlName="years_of_experience" class="form-control" placeholder="Years of Experience">
+                    </div>
+                </div>
+                <p class="text-danger">{{message}}</p>
+            </div>
+
+            <div class="steps" *ngIf="step === 3" formGroupName="addressDetails">
+                <h4 class="stepHeading">Address Details</h4>
+                <div class="form-group">
+                    <label for="">City</label>
+                    <input type="text" formControlName="city" class="form-control" placeholder="City">
+                </div>
+                <div class="form-group">
+                    <label for="">LGA</label>
+                    <input type="text" formControlName="lga_id" class="form-control" placeholder="L.G.A">
+                </div>
+                <div class="form-group">
+                    <label for="">Street</label>
+                    <input type="text" formControlName="street" class="form-control" placeholder="Street">
+                </div>
+                <p class="text-danger">{{message}}</p>
+            </div>
+
+            <div class="steps" *ngIf="step === 4" formGroupName="telephoneDetails">
+                <h4 class="stepHeading">Telephone Details</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Telephone Type</label>
+                        <input type="text" formControlName="type" class="form-control" placeholder="Home / Office">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Telephone Number</label>
+                        <input type="tel" formControlName="telephone" class="form-control" placeholder="Tel">
+                    </div>
+                </div>
+                <p class="text-danger">{{message}}</p>
+            </div>
+
+            <div class="steps" *ngIf="step === 5" formGroupName="nextOfKinInfo">
+                <h4 class="stepHeading">Next of Kin Details</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Next of Kin First name</label>
+                        <input type="text" formControlName="next_of_kin_first_name" class="form-control" placeholder="Company Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Next of Kin Last Name</label>
+                        <input type="text" formControlName="next_of_kin_last_name" class="form-control" placeholder="Payment Date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Relationship</label>
+                    <input type="text" formControlName="next_of_kin_relationship" class="form-control" placeholder="Payment Date">
+                </div>
+                <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input type="tel" formControlName="next_of_kin_phone" class="form-control" placeholder="Next of Kin Phone Number">
+                </div>
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <input type="number" formControlName="next_of_kin_address" class="form-control" placeholder="Next of Kin Address">
+                </div>
+                <p class="text-danger">{{message}}</p>
+            </div>
+
+            <div class="steps" *ngIf="step === 6" formGroupName="guarrantorInfo">
+                <h4 class="stepHeading">Guarantor's Details</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">Guarranto First Name</label>
+                        <input type="text" formControlName="first_name" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Guarrantor's Last Name</label>
+                        <input type="date" formControlName="last_name" class="form-control" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Guarrantor's Place of Work</label>
+                    <input type="text" formControlName="place_of_work" class="form-control" placeholder="Lpace of Work">
+                </div>
+                <div class="form-group">
+                    <label for="">Guarrantor's Office Email</label>
+                    <input type="email" formControlName="office_email" class="form-control" placeholder="Office Email">
+                </div>
+                <div class="form-group">
+                    <label for="">Guarrantor's Office Address</label>
+                    <input type="text" formControlName="office_address" class="form-control" placeholder="Office Address">
+                </div>
+                <div class="form-group">
+                    <label for="">Guarrantor's Home Address</label>
+                    <input type="text" formControlName="home_address" class="form-control" placeholder="Home Address">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="">Upload Bank Statement</label>
+                    <input type="file" formControlName="content">
+                </div>
+                <p class="text-danger">{{message}}</p>
+            </div>
+
+            <div class="btns">
+                <button type="button" class="btn btn-warning btn-md mr-3"  *ngIf="step !== 1" (click)="previous()"><i class="fa fa-arrow-left mr-2"></i>Previous</button>
+                <button class="btn btn-warning btn-md mr-3" *ngIf="step !== 6">Next<i class="fa fa-arrow-right ml-2"></i></button>
+                <button class="btn btn-warning btn-md" *ngIf="step === 6">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+

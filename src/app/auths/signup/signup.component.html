@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="img-text">
+                <div class="text">
+                    <h1>Quick Cash,</h1>
+                    <h1>Anytime</h1>
+                    <p>Never Go Broke Again</p>
+                </div>
+                <img src="assets/images/client.webp" alt="" class="rounded">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+                <!-- <div class="form-group">
+                    <label for="formGroupExampleInput"><span class="required">*</span> First Name</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" formControlName='email' placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput"><span class="required">*</span> Last Name</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" formControlName='email' placeholder="Last Name">
+                </div> -->
+                <div class="form-group phone">
+                    <label for="formGroupExampleInput"><span class="required">*</span> Phone Number</label>
+                    <input type="text" class="form-control" formControlName="phone_number" 
+                            [ng2TelInputOptions]="{initialCountry: 'ng'}" 
+                            ng2TelInput (countryChange)="getCountry($event)" 
+                            (ng2TelOutput)="getNumber($event)"
+                            placeholder="Phone Number">
+                    <div *ngIf="phone.invalid && (phone.touched || phone.touched)">
+                        <p class="text-danger" *ngIf="phone.hasError('required')">Valid Phone number is required</p>
+                        <p class="text-danger" *ngIf="phone.hasError('maxLength')">Phone number should not be more than 14</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput"><span class="required">*</span> PIN</label>
+                    <input type="password" class="form-control" formControlName='pin' placeholder="PIN">
+                    <div *ngIf="pin.invalid && (pin.touched || pin.touched)">
+                        <p class="text-danger" *ngIf="pin.hasError('required')">Valid Pin is required</p>
+                        <p class="text-danger" *ngIf="pin.hasError('minlength')">Pin must be 6</p>
+                        <p class="text-danger" *ngIf="pin.hasError('maxlength')">Pin must be 6</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Referral Code</label>
+                    <input type="text" class="form-control" formControlName='referral_code' placeholder="Referral Code">
+                </div>
+                <!-- <div class="form-group">
+                    <label for="formGroupExampleInput2"><span class="required">*</span> Confirm Password</label>
+                    <input type='password' formControlName='password' class="form-control password" id="formGroupExampleInput2" placeholder="confirm password">
+                </div> -->
+                <button type="submit" class="btn btn-warning btn-lg btn-block" [disabled]="signUpForm.invalid">Sign up</button>
+            </form>
+
+            <p class='mt-4'>Already have an account? <a routerLink="/authentication/login">log in</a></p>
+        </div>
+    </div>
+</div>

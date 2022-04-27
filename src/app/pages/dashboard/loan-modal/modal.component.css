@@ -1,0 +1,25 @@
+.faStyle {
+    position: relative;
+}
+
+input {
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.fa-usd {
+    position: absolute;
+    top: 38%;
+    left: 4%;
+    opacity: 0.4;
+}
+
+select {
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.modal-header {
+    border-bottom: none;
+}

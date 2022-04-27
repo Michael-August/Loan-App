@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="img-text">
+                <div class="text">
+                    <h1>Quick Cash,</h1>
+                    <h1>Anytime</h1>
+                    <p>Never Go Broke Again</p>
+                </div>
+                <img src="assets/images/client.webp" alt="" class="rounded">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form [formGroup]='authDetails' (ngSubmit)='login()'>
+                <div class="form-group phone">
+                    <label for=""><span class="required">*</span> Phone Number</label>
+                    <input type="text" [ng2TelInputOptions]="{initialCountry: 'ng'}" 
+                            ng2TelInput (countryChange)="getCountry($event)" 
+                            (ng2TelOutput)="getNumber($event)" [ngClass]="{'border-color': username.invalid && (username.dirty || username.touched)}" class="form-control" id="formGroupExampleInput" formControlName='username' placeholder="Phone Number">
+                    <div class="text-danger font-weight-bold" *ngIf='username.invalid && (username.dirty || username.touched)'>
+                        <p *ngIf="username.hasError('required')">Pnone Number is required</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for=""><span class="required">*</span> Pin</label>
+                    <input [type]='showPassword ? setText : setPassword' [ngClass]="{'border-color': pin.invalid && (pin.dirty || pin.touched)}" formControlName='pin' class="form-control password" id="formGroupExampleInput2" placeholder="Pin">
+                    <i *ngIf="!showPassword" (click)="togglePassword()" class="fa fa-eye-slash"></i>
+                    <i *ngIf="showPassword" (click)="togglePassword()" class="fa fa-eye"></i>
+                    <div class="text-danger font-weight-bold" *ngIf='pin.invalid && (pin.dirty || pin.touched)'>
+                        <p *ngIf="pin.hasError('required')">Pin is required</p>
+                        <p *ngIf="pin.hasError('maxlength')">Pin must be 6</p>
+                        <p *ngIf="pin.hasError('minlength')">Pin must be 6</p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning btn-lg btn-block" [disabled]="authDetails.invalid">Log in</button>
+            </form>
+
+            <p class='mt-4'>Don't have an account? <a routerLink="/authentication/signup">sign in</a></p>
+        </div>
+    </div>
+</div>
