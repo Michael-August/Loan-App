@@ -18,6 +18,8 @@ export class KycFormComponent implements OnInit {
   telephoneDetails = false
   guarrantorInfo = false
 
+  showLoader: boolean = false
+
   message: string = ''
 
   selectedFile?: Blob
@@ -126,9 +128,10 @@ export class KycFormComponent implements OnInit {
           content: this.base64,
           name: ""
         }
+        this.showLoader = true
         this.kycAPIs.kycUserDocument(userDocumentPayload).subscribe(res => {
           console.log(res);
-        })
+        }).add(() => this.showLoader = false)
       }
       this.proffesionalDetails = true
     }
@@ -138,9 +141,10 @@ export class KycFormComponent implements OnInit {
         let payload = {
           ...this.kycForm.controls['proffesionalDetails'].value
         }
+        this.showLoader = true
         this.kycAPIs.kycProffesionalDetails(payload).subscribe(res => {
           console.log(res)
-        })
+        }).add(() => this.showLoader = false)
       }
       this.addressDetails = true
     }
@@ -150,9 +154,10 @@ export class KycFormComponent implements OnInit {
         let payload = {
           ...this.kycForm.controls['addressDetails'].value
         }
+        this.showLoader = true
         this.kycAPIs.kycAddressDetails(payload).subscribe(res => {
           console.log(res)
-        })
+        }).add(() => this.showLoader = false)
       }
       this.telephoneDetails = true
     }
@@ -162,9 +167,10 @@ export class KycFormComponent implements OnInit {
         let payload = {
           ...this.kycForm.controls['telephoneDetails'].value
         }
+        this.showLoader = true
         this.kycAPIs.kycTelephoneDetails(payload).subscribe(res => {
           console.log(res)
-        })
+        }).add(() => this.showLoader = false)
       }
       this.nextOfKinInfo = true
     }
@@ -174,9 +180,10 @@ export class KycFormComponent implements OnInit {
         let payload = {
           ...this.kycForm.controls['nextOfKinInfo'].value
         }
+        this.showLoader = true 
         this.kycAPIs.kycNextOfKinDetails(payload).subscribe(res => {
           console.log(res)
-        })
+        }).add(() => this.showLoader = false)
       }
       this.guarrantorInfo = true
     }
@@ -188,6 +195,7 @@ export class KycFormComponent implements OnInit {
         let payload = {
           ...this.kycForm.controls['guarrantorInfo'].value
         }
+        this.showLoader = true
         this.kycAPIs.kycGuarrantorDetails(payload).subscribe(res => {
           console.log(res);
         })
@@ -197,10 +205,11 @@ export class KycFormComponent implements OnInit {
           content: this.base64,
           name: ""
         }
+        this.showLoader = true
         this.kycAPIs.kycGuarrantorDocument(guarrantorDocumentPayload).subscribe(res => {
           console.log(res);
           this.router.navigate(['Authenticated/dashboard/'])
-        })
+        }).add(() => this.showLoader = false)
       }
     }
   }

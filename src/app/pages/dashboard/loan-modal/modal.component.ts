@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoanService } from 'src/app/shared/services/loan-service/loan-service.service';
+import { SWEET_ALERT, TIMED_SWEET_ALERT } from 'src/app/shared/utils/helper';
 
 @Component({
   selector: 'app-modal',
@@ -25,6 +26,7 @@ export class ModalComponent implements OnInit {
   })
 
   step: number = 1
+  showLoader = false
 
   loanType: any = []
   message: string = ''
@@ -83,8 +85,15 @@ export class ModalComponent implements OnInit {
     this.payBackPerMonth = this.payBack / tenure
   }
 
+  closeMyModal() {
+    let element: any = document.getElementById('close')
+    element.click()
+  }
+
   getStarted() {
-    this.step += 1 
+    this.step++
+    console.log(this.step);
+    
     if (this.step === 3) {
       let payLoad = {
         ...this.loanGetStarted.get('loanNegotiation')?.value,
@@ -92,16 +101,25 @@ export class ModalComponent implements OnInit {
       }
       if (this.loanGetStarted.valid) {
         console.log(payLoad);
+        this.showLoader = true
         this.loanService.applyForLoan(payLoad).subscribe((res: any) => {
-          if (res.code === '08') {
+          TIMED_SWEET_ALERT('Successful', 'Loan applied Successfully', 'success')
+          this.closeMyModal()
+          this.route.navigate(['/Authenticated/dashboard'])
+          console.log(res)
+        }, err => {
+          console.log(err);
+          if (err.error.code === "08") {
+            SWEET_ALERT('Unable to apply for Loan', 'Please complete our KYC section to be eligible for loan.', 'error')
+            this.closeMyModal()
             this.route.navigate(['/Authenticated/dashboard/KYC'])
-          } else {
-            this.route.navigate(['/Authenticated/dashboard'])
           }
-        })
+        }).add(() => this.showLoader = false)
       } else {
-        alert("Please Fill the form correctly")
+        SWEET_ALERT('Error', 'Please fill the form correctly','error')
+        this.step -= 2
       }
-    }
+      return 
+    } 
   }
 }

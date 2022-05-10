@@ -1,6 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IKycAddressDetails, IKycGuarrantorDetails, IKycGuarrantorDocument, IKycNexoffKinDetails, IKycPersonalDetails, IKycProffesionalDetails, IKycTelephoneDetails, IKycUserDocument } from 'src/app/pages/dashboard/KYC-form/kyc.models';
+import {
+  IKycAddressDetails,
+  IKycGuarrantorDetails,
+  IKycGuarrantorDocument,
+  IKycNexoffKinDetails,
+  IKycPersonalDetails,
+  IKycProffesionalDetails,
+  IKycTelephoneDetails,
+  IKycUserDocument
+} from 'src/app/pages/dashboard/KYC-form/kyc.models';
 import { BASE_URL } from 'src/environments/environment';
 
 @Injectable({

@@ -74,3 +74,14 @@
     }
 }
 
+.card-body > h6 > span {
+    float: right;
+    cursor: pointer;
+    color: black;
+    font-weight: 700;
+}
+
+.transactions {
+    margin-top: 12%;
+}
+

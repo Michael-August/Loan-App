@@ -1,3 +1,4 @@
+<app-loader *ngIf="showLoader"></app-loader>
 <div class="container">
     <div class="row heading">
         <div class="col-md-3">
@@ -32,7 +33,7 @@
                     <hr>
                     <div class="center">
                         <p class="card-text">Take Your first Loan from Loaniit</p>
-                        <button href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">Apply Now</button>
+                        <button href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#loanModal">Apply Now</button>
                     </div>
                     <img src="assets/images/loan.png" class="mt-4" alt="">
                 </div>
@@ -41,17 +42,31 @@
         <div class="col-md-6 recent-transactions">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-subtitle text-muted">Recent Transactions <span>see all</span></h6>
+                    <h6 class="card-subtitle text-muted">Recent Transactions <span routerLink="/Authenticated/dashboard/transactions"> see all <i class="fa fa-arrow-right"></i></span></h6>
+                    <div class="transactions">
+                        <div *ngIf="transactions.length === 0" class="center mt-5">
+                            <p class="card-text">No transactions Yet</p>
+                            <!-- <a href="#" class="btn btn-sm btn-warning">Apply Now</a> -->
+                        </div>
+                        <img *ngIf="transactions.length === 0" src="assets/images/recent.webp" class="mt-4" alt="">
+
+                        <div class="">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let transaction of transactions">
+                                        <th>{{transaction.created_at | date: 'dd/MM/yy'}}</th>
+                                        <td>{{transaction.narration}}</td>
+                                        <td *ngIf="transaction.status === 2"><span class="badge" ngClass="transaction.status === 2 ? badge-danger">FAILED</span></td>
+                                        <td *ngIf="transaction.status === 0"><span class="badge" ngClass="transaction.status === 0 ? badge-warning">PENDING</span></td>
+                                        <td *ngIf="transaction.status === 1"><span class="badge" ngClass="transaction.status === 1 ? badge-success">SUCCESFUL</span></td>
+                                        <th class="text-danger" *ngIf="transaction.type === 'DEBIT'">-{{transaction.amount}}</th>
+                                        <th class="text-success" *ngIf="transaction.type === 'CREDIT'">{{transaction.amount}}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     
-                    <div class="center mt-5">
-                        <p class="card-text">No transactions Yet</p>
-                        <!-- <a href="#" class="btn btn-sm btn-warning">Apply Now</a> -->
-                    </div>
-                    <img src="assets/images/recent.webp" class="mt-4" alt="">
-
-                    <div class="">
-
-                    </div>
                 </div>
             </div>
         </div>

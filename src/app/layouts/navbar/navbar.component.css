@@ -12,10 +12,36 @@
     cursor: pointer;
 }
 
+.a {
+    margin-right: 2em;
+}
+
 .navbar-light .navbar-brand {
     color: whitesmoke;
+    margin-right: 20em;
 }
 
 .navbar-light .navbar-text {
     color: whitesmoke;
+    margin-right: -17em;
+}
+
+.auth {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.auth > li {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+img {
+    clip-path: circle();
+    width: 10%;
+}
+
+.active {
+    border-bottom: 1px solid #ffc107;
 }

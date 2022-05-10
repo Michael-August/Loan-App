@@ -12,11 +12,14 @@ import { FormComponent } from './KYC-form/form-not-used/form.component';
 import { ProgressComponent } from 'src/app/progress.component';
 import { AuthGuard } from 'src/app/shared/guards/auth-guard.guard';
 import { KycFormComponent } from './KYC-form/kyc-form/kyc-form.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const dashboardRoutes: Routes = [
   { path: '', component: DashboardComponent , canActivate: [AuthGuard]},
   { path: 'transactions', component: TransactionsComponent },
   { path: 'KYC', component: KycFormComponent },
+  { path: 'profile', component: ProfileComponent },
 ]
 
 @NgModule({
@@ -29,13 +32,15 @@ const dashboardRoutes: Routes = [
     ModalComponent,
     FormComponent,
     ProgressComponent,
-    KycFormComponent
+    KycFormComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(dashboardRoutes),
     FormsModule,
     ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class DashboardModule { }

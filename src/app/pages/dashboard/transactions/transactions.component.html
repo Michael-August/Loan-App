@@ -1,1 +1,21 @@
-<p>transactions works!</p>
+<app-loader *ngIf="showLoader"></app-loader>
+<section class="header">
+    <h2>All Transactions</h2>
+</section>
+<div class="container">
+    <div class="content">
+        <table class="table table-hover">
+            <tbody>
+                <tr *ngFor="let transaction of transactions">
+                    <th>{{transaction.created_at | date: 'dd/MM/yy'}}</th>
+                    <td>{{transaction.narration}}</td>
+                    <td *ngIf="transaction.status === 2"><span class="badge" ngClass="transaction.status === 2 ? badge-danger">FAILED</span></td>
+                    <td *ngIf="transaction.status === 0"><span class="badge" ngClass="transaction.status === 0 ? badge-warning">PENDING</span></td>
+                    <td *ngIf="transaction.status === 1"><span class="badge" ngClass="transaction.status === 1 ? badge-success">SUCCESFUL</span></td>
+                    <th class="text-danger" *ngIf="transaction.type === 'DEBIT'">-{{transaction.amount}}</th>
+                    <th class="text-success" *ngIf="transaction.type === 'CREDIT'">{{transaction.amount}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

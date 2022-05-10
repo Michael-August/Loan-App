@@ -1,32 +1,36 @@
-import { createReducer, on } from "@ngrx/store"
+import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store"
 import * as AuthActions from '../actions/auth.actions'
 
 export const authFeatureKey = 'auth'
 
-export interface State {
+export interface AuthState {
     user: any
     error: any
 }
 
-export const initialState: State = {
-    user: {},
+export const initialState: AuthState = {
+    user: null,
     error: null
 }
 
-export const reducer = createReducer(
+export const authReducer = createReducer(
     initialState,
-    on(AuthActions.loginSuccess, (state, action) => {
+    on(AuthActions.loginSuccess, (state, { user }) => {
         return {
             ...state,
-            user: action.user,
+            user: user,
             error: null
         }
     }),
-    on(AuthActions.loginFailure, (state, action) => {
+    on(AuthActions.loginFailure, (state, { error }) => {
         return {
             ...state,
-            user: {},
-            error: action.error
+            user: null,
+            error: error
         }
     })
 )
+
+export const selectAuthState = createFeatureSelector<AuthState>('authData')
+
+export const selectUser = createSelector(selectAuthState, state => state.user)

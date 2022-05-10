@@ -7,6 +7,12 @@ import { AppRoutingModule } from './app.routing';
 import { Four0fourComponent } from './pages/four0four/four0four.component';
 import { AuthInterceptor } from './shared/inteceptors/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
+import { authReducer } from './store/reducers/auth.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/auth.effects';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +23,9 @@ import { StoreModule } from '@ngrx/store';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule
+    StoreModule.forRoot({ authData: authReducer }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [
     {

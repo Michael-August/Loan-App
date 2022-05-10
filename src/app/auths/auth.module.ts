@@ -5,9 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2TelInputModule } from 'ng2-tel-input';
-import { StoreModule } from '@ngrx/store';
-import { AUTH_NAME } from '../store/selectors/auth.selectors';
-import { reducer } from '../store/reducers/auth.reducer';
+import { SharedModule } from '../shared/shared.module';
 
 const authRoute: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,9 +22,9 @@ const authRoute: Routes = [
     CommonModule,
     RouterModule.forChild(authRoute),
     FormsModule,
-    // StoreModule.forFeature(AUTH_NAME, reducer),
     ReactiveFormsModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    SharedModule
   ]
 })
 export class AuthModule { }

@@ -1,25 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="#">Loaniit</a>
+  <a class="navbar-brand" routerLink="/Authenticated/dashboard">Loaniit</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/Authenticated/dashboard">Overview</a>
-      </li>
       <li class="nav-item">
+        <a class="nav-link a" routerLink="/Authenticated/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Overview</a>
+      </li>
+      <!-- <li class="nav-item">
         <a class="nav-link" routerLink="/Authenticated/loan">Loan</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link a" routerLink="/Authenticated/dashboard/transactions" routerLinkActive="active">Transactions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/Authenticated/transactions">Transactions</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">Settings</a>
+        <a class="nav-link a" routerLink="/Authenticated/dashboard/profile" routerLinkActive="active">Settings</a>
       </li>
     </ul>
     <span class="navbar-text">
-      Navbar text with an inline element
+      <ul class="navbar-nav mr-auto auth">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Authenticated/dashboard" *ngIf="!user">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()" *ngIf="user">Log Out</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="user" routerLink="/Authenticated/dashboard/profile">
+            <img [src]="profileImg" alt=""> {{fullname}}
+          </a>
+        </li>
+      </ul>
     </span>
   </div>
 </nav>

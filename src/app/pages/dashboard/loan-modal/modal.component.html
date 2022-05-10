@@ -1,12 +1,13 @@
 <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="modal fade" id="loanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Apply for a Loan</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -20,6 +21,7 @@
                 <option [value]='loan.id' *ngFor="let loan of loanType">{{ loan.name }}</option>
               </select>
               <p class="text-danger" *ngIf="!is_avail">{{message}}</p>
+              <p class="text-danger" *ngIf="loan_id.hasError('required')">Please Select a valid loan type.</p>
               <div *ngIf="loan_id.invalid && (loan_id.touched || loan_id.dirty)">
                 <p class="text-danger">Loan Type or Tenure is required</p>
               </div>
@@ -83,8 +85,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="submit" *ngIf="step === 1" (click)="getStarted()" class="btn btn-warning btn-lg btn-block">Get Started <i class="fa fa-arrow-right ml-4"></i></button>
-        <button type="submit" *ngIf="step === 2" (click)="getStarted()" class="btn btn-warning btn-lg btn-block">Apply <i class="fa fa-arrow-right ml-4"></i></button>
+        <button type="submit" (click)="getStarted()" class="btn btn-warning btn-lg btn-block">Apply <i class="fa fa-arrow-right ml-4"></i></button>
+        <!-- <button type="submit" *ngIf="step === 2" (click)="getStarted()" data-dismiss="modal" aria-label="Close" class="btn btn-warning btn-lg btn-block">Apply Now <i class="fa fa-arrow-right ml-4"></i></button> -->
       </div>
     </div>
   </div>

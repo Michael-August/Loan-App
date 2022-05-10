@@ -1,0 +1,91 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 left">
+            <img [src]="profileImg" alt="">
+            <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="col-md-8 right">
+            <header>
+                <ul>
+                    <li (click)="change('profile')" [ngClass]="state.current === 'profile' ? 'active' : ''">Profile</li>
+                    <li (click)="change('account')" [ngClass]="state.current === 'account' ? 'active' : ''">Accounts</li>
+                    <li (click)="change('setting')" [ngClass]="state.current === 'setting' ? 'active' : ''">Setting</li>
+                </ul>
+                <p>Referral Code: {{user.referral_code}}</p>
+            </header>
+            <hr>
+            <ng-container class="">
+                <ng-template [ngIf]="state.current === 'profile'">
+                        <div class="tab">
+                            <h4>Profile</h4>
+                            <form action="" [formGroup]="profileInfo">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="">First Name</label>
+                                        <input type="text" formControlName="first_name" class="form-control" placeholder="First Name">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Last Name</label>
+                                        <input type="text" formControlName="last_name" class="form-control" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">BVN</label>
+                                    <input type="number" formControlName="bvn" class="form-control" placeholder="BVN">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="">Email</label>
+                                        <input type="email" formControlName="email" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Phone Number</label>
+                                        <input type="text" formControlName="phone_number" class="form-control" placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <button class="btn btn-warning btn-md" (click)="update()">Update</button>
+                            </form>
+                        </div> 
+                </ng-template>
+
+                <ng-template [ngIf]="state.current === 'account'">
+                    <div class="tab">
+                        <div class="account">
+                            <div class="details">
+                                <p class="number">Account Number</p>
+                                <p class="name">Account Name</p>
+                            </div>
+                            <div class="delete">
+                                <i class="fa fa-trash"></i>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                </ng-template>
+
+                <ng-template [ngIf]="state.current === 'setting'">
+                    <div class="tab">
+                        <ul class="settings">
+                            <li (click)="changeSetting('banks')">Add Bank Details</li>
+                            <li (click)="changeSetting('pin')">Reset Pin</li>
+                        </ul>
+
+                        <ng-template [ngIf]="settingState === 'banks'">
+                            <div class="tab2 banks">
+                                Banks
+                            </div>
+                        </ng-template>
+
+                        <ng-template [ngIf]="settingState === 'pin'">
+                            <div class="tab2 pin">
+                                Pin
+                            </div>
+                        </ng-template>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </div>
+    </div>
+</div>

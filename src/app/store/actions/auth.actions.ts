@@ -1,8 +1,10 @@
 import { createAction, props } from "@ngrx/store";
+import { ILogInUser } from '../../auths/auth.model'
 
 export const loginPage = createAction(
     '[Login Component] Login User',
-    props<{ username: string; password: string; device_name: string }>()
+    (userInfo: ILogInUser) => userInfo
+    // props<{ username: string; pin: string; device_name: string }>()
 )
 
 export const loginSuccess = createAction(
