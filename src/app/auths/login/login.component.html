@@ -1,4 +1,4 @@
-<app-loader *ngIf="showLoader"></app-loader>
+<app-loader *ngIf="showLoader "></app-loader>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -22,6 +22,7 @@
                         <p *ngIf="username.hasError('required')">Pnone Number is required</p>
                     </div>
                 </div>
+                2348033523720 use as phone number
                 <div class="form-group">
                     <label for=""><span class="required">*</span> Pin</label>
                     <input [type]='showPassword ? setText : setPassword' [ngClass]="{'border-color': pin.invalid && (pin.dirty || pin.touched)}" formControlName='pin' class="form-control password" id="formGroupExampleInput2" placeholder="Pin">
@@ -33,6 +34,8 @@
                         <p *ngIf="pin.hasError('minlength')">Pin must be 6</p>
                     </div>
                 </div>
+                123456 use as password
+                Backend is beyond my control
                 <button type="submit" class="btn btn-warning btn-lg btn-block" [disabled]="authDetails.invalid">Log in</button>
             </form>
 

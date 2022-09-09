@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BASE_URL } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,11 @@ export class GeneralService{
   }
     
   getTransactions() {
-    return this.http.get(`${BASE_URL}/transaction`)
+    return this.http.get(`${environment.BASE_URL}/transaction`)
   }
 
   getUserBankDetails() {
-    return this.http.get(`${BASE_URL}/bank-account`)
+    return this.http.get(`${environment.BASE_URL}/bank-account`)
   }
   
 }
